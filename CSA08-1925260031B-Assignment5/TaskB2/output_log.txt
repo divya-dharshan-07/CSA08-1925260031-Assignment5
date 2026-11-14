@@ -1,0 +1,33 @@
+============================================================
+EXECUTING: task_b2_complete_code.py
+============================================================
+54.0 108.0
+None
+
+
+============================================================
+EXECUTING: task_b2_adversarial.py
+============================================================
+=== 1. ADVERSARIAL FILE INPUTS ===
+- Missing Column (no pm25)       -> REJECTED [Missing Column(s)]: Missing ['pm25'] in headers ['date', 'station'].
+- Wrong Delimiter (semicolon)    -> REJECTED [Wrong Delimiter]: Expected ',' but detected 'station;date;pm25'.
+- Different Encoding (Latin-1)   -> REJECTED [Encoding Error]: 'utf-8' codec can't decode byte 0xe4 in position 20: invalid continuation byte
+- Empty File (0 bytes)           -> REJECTED [Empty File]: Input contains 0 bytes/lines.
+
+=== 2. SQL INJECTION: STRING CONCATENATION (+) vs PARAMETERIZED (?) ===
+Unsafe (+) Query : SELECT station, pm25 FROM aq WHERE station = 'Adyar' OR '1'='1'
+Unsafe (+) Result: [('Adyar', 48.0), ('Guindy', 95.0), ('St. Thomas Mount', 72.0)]  <-- DATA LEAK! Returned entire table!
+Safe (?) Result  : []  <-- SAFE! Treated literally as station name.
+Legit quote name : [('St. Thomas Mount', 72.0)]
+
+=== 3. ADVERSARIAL SENTIMENT INPUTS ===
+- [Sarcasm        ] Predicted=neutral  | Expected=negative       | Text: Oh great, another wonderful morning choking on thick black smoke, so helpful!
+- [Double Negative] Predicted=positive | Expected=positive       | Text: The air quality is not never bad here anymore.
+- [Mixed Opinion  ] Predicted=neutral  | Expected=mixed/negative | Text: The new sensor display is fast and helpful, though the factory smoke is bad.
+
+=== 4. ALTERNATIVE ANALYSIS: executemany() vs execute() IN LOOP ===
+Rows=  1,000 | execute() loop: 0.0031s | executemany(): 0.0031s (Speedup: 1.03x)
+Rows= 20,000 | execute() loop: 0.0437s | executemany(): 0.0271s (Speedup: 1.61x)
+Rows=100,000 | execute() loop: 0.2275s | executemany(): 0.1409s (Speedup: 1.61x)
+
+

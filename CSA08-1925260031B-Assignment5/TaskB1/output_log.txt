@@ -1,0 +1,55 @@
+============================================================
+EXECUTING: task_b1_complete_code.py
+============================================================
+[('Adyar', '2026-10-01', 48.0), ('Guindy', '2026-10-01', 95.0), ('Guindy', '2026-10-03', 121.0)]
+[0.0, 0.644, 1.0]
+After adding spike row (pm25=1450): [('Adyar', '2026-10-01', 48.0), ('Guindy', '2026-10-01', 95.0), ('Guindy', '2026-10-03', 121.0)]
+
+
+============================================================
+EXECUTING: task_b1_pipeline.py
+============================================================
+=== B1.1: BEFORE CLEANING (RAW CSV) ===
+station_id,station_name,date,hour,pm25,pm10,no2,temperature
+ST01, adyar ,2026-10-01,08,48.0,82.0,27.5,29.4
+ST01, adyar ,2026-10-01,08,48.0,82.0,27.5,29.4
+ST01,Adyar,2026-10-01,09,NA,85.0,28.0,30.1
+ST01,Adyar,2026-10-01,10,,90.2,31.0,31.2
+ST01,Adyar,2026-10-02,14,64.5,112.0,35.4,32.8
+ST01,Adyar,2026-10-03,18,88.0,145.0,44.2,30.5
+ST02,Guindy,2026-10-01,08,95.0,160.0,52.0,30.0
+ST02,Guindy,2026-10-01,12,-5.0,140.0,48.0,32.5
+ST02,Guindy,2026-10-02,17,121.0,198.0,61.5,33.4
+ST02,Guindy,2026-10-03,20,1450.0,210.0,65.0,31.0
+ST03,Anna Nagar,2026-10-01,09,62.0,104.0,38.0,86.0
+ST03,Anna Nagar,2026-10-02,15,74.0,126.0,42.5,91.4
+ST03,Anna Nagar,2026-10-03,21,55.0,96.0,33.0,82.4
+
+=== B1.1: AFTER CLEANING ===
+{'station_id': 'ST01', 'station_name': 'Adyar', 'day': '2026-10-01', 'hour': 8, 'pm25': 48.0, 'pm10': 82.0, 'no2': 27.5, 'temp_c': 29.4, 'pm25_minmax': 0.0}
+{'station_id': 'ST01', 'station_name': 'Adyar', 'day': '2026-10-01', 'hour': 9, 'pm25': 48.0, 'pm10': 85.0, 'no2': 28.0, 'temp_c': 30.1, 'pm25_minmax': 0.0}
+{'station_id': 'ST01', 'station_name': 'Adyar', 'day': '2026-10-01', 'hour': 10, 'pm25': 48.0, 'pm10': 90.2, 'no2': 31.0, 'temp_c': 31.2, 'pm25_minmax': 0.0}
+{'station_id': 'ST01', 'station_name': 'Adyar', 'day': '2026-10-02', 'hour': 14, 'pm25': 64.5, 'pm10': 112.0, 'no2': 35.4, 'temp_c': 32.8, 'pm25_minmax': 0.226}
+{'station_id': 'ST01', 'station_name': 'Adyar', 'day': '2026-10-03', 'hour': 18, 'pm25': 88.0, 'pm10': 145.0, 'no2': 44.2, 'temp_c': 30.5, 'pm25_minmax': 0.548}
+{'station_id': 'ST02', 'station_name': 'Guindy', 'day': '2026-10-01', 'hour': 8, 'pm25': 95.0, 'pm10': 160.0, 'no2': 52.0, 'temp_c': 30.0, 'pm25_minmax': 0.644}
+{'station_id': 'ST02', 'station_name': 'Guindy', 'day': '2026-10-02', 'hour': 17, 'pm25': 121.0, 'pm10': 198.0, 'no2': 61.5, 'temp_c': 33.4, 'pm25_minmax': 1.0}
+{'station_id': 'ST03', 'station_name': 'Anna Nagar', 'day': '2026-10-01', 'hour': 9, 'pm25': 62.0, 'pm10': 104.0, 'no2': 38.0, 'temp_c': 30.0, 'pm25_minmax': 0.192}
+{'station_id': 'ST03', 'station_name': 'Anna Nagar', 'day': '2026-10-02', 'hour': 15, 'pm25': 74.0, 'pm10': 126.0, 'no2': 42.5, 'temp_c': 33.0, 'pm25_minmax': 0.356}
+{'station_id': 'ST03', 'station_name': 'Anna Nagar', 'day': '2026-10-03', 'hour': 21, 'pm25': 55.0, 'pm10': 96.0, 'no2': 33.0, 'temp_c': 28.0, 'pm25_minmax': 0.096}
+
+=== B1.3: SQL QUERIES FOR BOARD QUESTIONS ===
+Q1 (Average PM2.5 of Adyar in Oct 2026): ('Adyar', 59.3)
+Q2 (Stations ranked by peak NO2): [('Guindy', 61.5), ('Adyar', 44.2), ('Anna Nagar', 42.5)]
+Q3 (Elevated PM2.5 > 70 and Temp > 30C): [('Adyar', '2026-10-03', 18, 88.0, 30.5), ('Guindy', '2026-10-02', 17, 121.0, 33.4), ('Anna Nagar', '2026-10-02', 15, 74.0, 33.0)]
+
+=== B1.4: CHARTS GENERATED (chart1..chart4.png) ===
+
+=== B1 ALTERNATIVE ANALYSIS: CSV LOOPS vs PANDAS (1k, 100k, 1M rows) ===
+Rows=   1,000 | csv+loops: 0.0090s (Peak PyMem: 0.06 MB) | pandas: 0.0127s (Peak PyMem: 0.34 MB)
+Rows= 100,000 | csv+loops: 0.6929s (Peak PyMem: 3.88 MB) | pandas: 0.0462s (Peak PyMem: 5.83 MB)
+Rows=1,000,000 | csv+loops: 6.8692s (Peak PyMem: 39.47 MB) | pandas: 0.2711s (Peak PyMem: 58.03 MB)
+
+[STDERR]
+OpenBLAS WARNING - could not determine the L2 cache size on this system, assuming 256k
+
+

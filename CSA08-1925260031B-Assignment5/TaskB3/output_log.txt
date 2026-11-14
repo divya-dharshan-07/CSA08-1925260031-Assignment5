@@ -1,0 +1,36 @@
+============================================================
+EXECUTING: task_b3_benchmark.py
+============================================================
+=== B3.1: CORRECTNESS ON SMALL DATA ===
+All methods agree identically: {('Adyar', '2026-10-01'): 50.0, ('Guindy', '2026-10-01'): 100.0}
+
+=== B3.2 & ALTERNATIVE ANALYSIS: SCALING BENCHMARK (1, 12, 120 STATIONS) ===
+Stations=  1 (    8,760 rows) | Py(store+mean): 0.0427s [0.17MB] | Py(1-pass): 0.0075s [0.08MB] | Pandas: 0.0035s | SQL: 0.0066s
+Stations= 12 (  105,120 rows) | Py(store+mean): 0.5827s [1.74MB] | Py(1-pass): 0.0938s [0.81MB] | Pandas: 0.0492s | SQL: 0.1093s
+Stations=120 (1,051,200 rows) | Py(store+mean): 6.1691s [16.89MB] | Py(1-pass): 1.0594s [8.39MB] | Pandas: 0.2356s | SQL: 1.3642s
+
+=== B3.3: cPROFILE REPORT ON PLAIN-PYTHON VERSION (12 STATIONS) ===
+         927436 function calls in 0.576 seconds
+
+   Ordered by: internal time
+   List reduced from 32 to 10 due to restriction <10>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+     4320    0.087    0.000    0.411    0.000 /usr/local/lib/python3.10/statistics.py:150(_sum)
+    45438    0.070    0.000    0.086    0.000 /usr/local/lib/python3.10/fractions.py:62(__new__)
+    20559    0.067    0.000    0.117    0.000 /usr/local/lib/python3.10/fractions.py:451(_add)
+        1    0.059    0.059    0.576    0.576 /home/bard/CSA08-1925260031B-Assignment5/TaskB3/task_b3_benchmark.py:27(method_python_loops_store)
+   105120    0.041    0.000    0.041    0.000 {method 'as_integer_ratio' of 'float' objects}
+   105120    0.036    0.000    0.078    0.000 /usr/local/lib/python3.10/statistics.py:240(_exact_ratio)
+   105120    0.024    0.000    0.024    0.000 {method 'setdefault' of 'dict' objects}
+     4320    0.018    0.000    0.226    0.000 {built-in method builtins.sum}
+   105120    0.018    0.000    0.018    0.000 {method 'get' of 'dict' objects}
+    64404    0.017    0.000    0.017    0.000 {built-in method math.gcd}
+
+
+
+
+[STDERR]
+OpenBLAS WARNING - could not determine the L2 cache size on this system, assuming 256k
+
+

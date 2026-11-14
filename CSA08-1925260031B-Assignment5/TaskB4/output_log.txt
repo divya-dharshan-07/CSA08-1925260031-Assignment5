@@ -1,0 +1,37 @@
+============================================================
+EXECUTING: task_b4_complete_code.py
+============================================================
+positive | Roads are clean and the bus was fast.
+negative | Smoke from the factory, air is bad.
+negative | The staff were not helpful.
+positive | Not bad, service improved.
+
+Misclassified example: positive | The sensor was not very helpful and thick smog covered the street.
+Why it fails: 'not' is separated from 'helpful' by 'very' (2 words back instead of 1), so 'helpful' stays +1, and 'smog' is absent from NEGATIVE.
+
+
+============================================================
+EXECUTING: task_b4_production.py
+============================================================
+=== B4.1: SENTIMENT & EXTRACTIVE SUMMARY ON 50 COMPLAINTS ===
+Human Agreement: 48/50 (96.0%)
+Sample Disagreements:
+  - Pred=neutral  vs Human=positive | Good work cleaning the canal road, dust and smoke reduced.
+  - Pred=neutral  vs Human=positive | Helpful engineers fixed the broken air display board quickly.
+
+Frequency-Based Top-3 Summary (1.106 ms):
+  * Air is bad and dirty.
+  * Not bad at all, morning air feels clean and park maintenance improved.
+  * Dirty smoke from brick kilns makes the neighborhood air bad.
+First-K Baseline Summary (0.016 ms):
+  * Air near Adyar bus depot is clean and visibility has improved this week.
+  * Heavy black smoke from the industrial estate every night.
+  * App response was fast and staff were helpful in resolving our ward complaint.
+
+=== B4.2: COMPOSITE INDEX (station, day) QUERY BENCHMARK ===
+Rows in table          : 322,560
+Index creation time    : 358.18 ms
+Avg query WITHOUT index: 34.7611 ms
+Avg query WITH index   : 0.3356 ms (Speedup: 103.6x faster)
+
+
