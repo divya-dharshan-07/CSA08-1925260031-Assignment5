@@ -4,7 +4,7 @@
 - **Student Name:** Divya Dharshan
 - **Register Number:** 1925260031B
 - **Repository Name:** `CSA08-1925260031B-Assignment5`
-- **Python Version:** Python 3.10.16
+- **Python Version:** Python 3.15.2
 
 ## Libraries Used (`requirements.txt`)
 - `pandas` (Data manipulation, grouping, and benchmark comparison)
